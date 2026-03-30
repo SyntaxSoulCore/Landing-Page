@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #000000;
+  --color-primary-cyan: #00FFFF;
+  --color-primary-purple: #8B5CF6;
+  --color-accent: #00BFFF;
+  --color-text: #F0F0F0;
+  --color-text-muted: #A0A0A0;
+  --gradient-primary: linear-gradient(135deg, #00FFFF, #8B5CF6);
+  --container-max-width: 1280px;
+  --spacing-section: 96px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #000000;
+  color: #F0F0F0;
+  font-family: Inter, Sora, system-ui, sans-serif;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #00FFFF, #8B5CF6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-border {
+  border: 1px solid;
+  border-image: linear-gradient(135deg, #00FFFF, #8B5CF6) 1;
+}
+
+.neon-glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.neon-glow-purple {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
