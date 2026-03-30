@@ -3,13 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --color-bg: #000000;
-  --color-primary-cyan: #00FFFF;
-  --color-primary-purple: #8B5CF6;
+  --color-bg: #080C14;
+  --color-bg-card: #0E1525;
+  --color-primary-cyan: #00E5FF;
+  --color-primary-purple: #8B2FE8;
   --color-accent: #00BFFF;
-  --color-text: #F0F0F0;
-  --color-text-muted: #A0A0A0;
-  --gradient-primary: linear-gradient(135deg, #00FFFF, #8B5CF6);
+  --color-text: #F0F4FF;
+  --color-text-muted: #8A9BBF;
+  --gradient-primary: linear-gradient(135deg, #00E5FF, #8B2FE8);
   --container-max-width: 1280px;
   --spacing-section: 96px;
 }
@@ -23,27 +24,130 @@ html {
 }
 
 body {
-  background-color: #000000;
-  color: #F0F0F0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-family: Inter, Sora, system-ui, sans-serif;
 }
 
+/* ── Typography ─────────────────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #00FFFF, #8B5CF6);
+  background: linear-gradient(135deg, #00E5FF, #8B2FE8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.gradient-border {
-  border: 1px solid;
-  border-image: linear-gradient(135deg, #00FFFF, #8B5CF6) 1;
+.gradient-text-shimmer {
+  background: linear-gradient(90deg, #00E5FF, #8B2FE8, #00E5FF);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
 }
 
+/* ── Glow utilities ─────────────────────────────────────── */
 .neon-glow-cyan {
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.35), 0 0 40px rgba(0, 229, 255, 0.15);
 }
 
 .neon-glow-purple {
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 0 20px rgba(139, 47, 232, 0.35), 0 0 40px rgba(139, 47, 232, 0.15);
 }
+
+.neon-glow-both {
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.2), 0 0 60px rgba(139, 47, 232, 0.15);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.7), 0 0 24px rgba(0, 229, 255, 0.3);
+}
+
+/* ── Borders ─────────────────────────────────────────────── */
+.gradient-border {
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, #00E5FF, #8B2FE8);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* ── Card styles ─────────────────────────────────────────── */
+.card-navy {
+  background: rgba(14, 21, 37, 0.7);
+  border: 1px solid rgba(0, 229, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.card-navy:hover {
+  border-color: rgba(0, 229, 255, 0.35);
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.1), 0 0 48px rgba(139, 47, 232, 0.08);
+}
+
+/* ── Circuit board background pattern ───────────────────── */
+.circuit-bg {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(0, 229, 255, 0.12) 1px, transparent 0);
+  background-size: 40px 40px;
+}
+
+.circuit-lines {
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── Section dividers ────────────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.3), rgba(139, 47, 232, 0.3), transparent);
+}
+
+/* ── Animations ─────────────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(140px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(140px) rotate(-360deg); }
+}
+
+@keyframes orbit-reverse {
+  from { transform: rotate(360deg) translateX(110px) rotate(-360deg); }
+  to { transform: rotate(0deg) translateX(110px) rotate(0deg); }
+}
+
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 16s linear infinite; }
+.animate-pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+.animate-orbit { animation: orbit 8s linear infinite; }
+.animate-orbit-reverse { animation: orbit-reverse 12s linear infinite; }
