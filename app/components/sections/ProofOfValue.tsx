@@ -11,7 +11,7 @@ const values = [
     ),
     title: 'Performance',
     description: 'APIs sub-100ms, otimizações de banco e caching inteligente por padrão.',
-    color: 'cyan',
+    color: 'cyan' as const,
   },
   {
     icon: (
@@ -21,7 +21,7 @@ const values = [
     ),
     title: 'Escalabilidade',
     description: 'Arquitetura distribuída pronta para crescer de mil para milhões de usuários.',
-    color: 'purple',
+    color: 'purple' as const,
   },
   {
     icon: (
@@ -31,7 +31,7 @@ const values = [
     ),
     title: 'Segurança',
     description: 'Autenticação robusta, validação de entrada e práticas OWASP desde o dia 1.',
-    color: 'cyan',
+    color: 'cyan' as const,
   },
   {
     icon: (
@@ -41,22 +41,28 @@ const values = [
     ),
     title: 'Arquitetura Limpa',
     description: 'Clean Architecture, SOLID e DDD aplicados para máxima manutenibilidade.',
-    color: 'purple',
+    color: 'purple' as const,
   },
 ]
 
 const colorMap = {
   cyan: {
-    icon: 'text-cyan-400',
-    border: 'border-cyan-500/20',
-    glow: 'hover:border-cyan-500/50 hover:shadow-[0_0_20px_rgba(0,255,255,0.1)]',
-    bg: 'bg-cyan-500/5',
+    icon: 'text-[#00E5FF]',
+    border: 'border-[#00E5FF]/15',
+    hoverBorder: 'hover:border-[#00E5FF]/50',
+    glow: 'hover:shadow-[0_0_32px_rgba(0,229,255,0.15)]',
+    bg: 'bg-[#00E5FF]/[0.04]',
+    iconBg: 'bg-[#00E5FF]/10',
+    barColor: '#00E5FF',
   },
   purple: {
-    icon: 'text-purple-400',
-    border: 'border-purple-500/20',
-    glow: 'hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(139,92,246,0.1)]',
-    bg: 'bg-purple-500/5',
+    icon: 'text-[#8B2FE8]',
+    border: 'border-[#8B2FE8]/15',
+    hoverBorder: 'hover:border-[#8B2FE8]/50',
+    glow: 'hover:shadow-[0_0_32px_rgba(139,47,232,0.15)]',
+    bg: 'bg-[#8B2FE8]/[0.04]',
+    iconBg: 'bg-[#8B2FE8]/10',
+    barColor: '#8B2FE8',
   },
 }
 
@@ -64,9 +70,13 @@ export default function ProofOfValue() {
   return (
     <section
       id="proof"
-      className="py-24 bg-black"
+      className="py-24 relative overflow-hidden"
+      style={{ background: '#080C14' }}
       aria-label="Prova de valor"
     >
+      {/* Subtle top divider */}
+      <div className="section-divider mb-0 absolute top-0 left-0 right-0" aria-hidden="true" />
+
       <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -75,31 +85,38 @@ export default function ProofOfValue() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+          <p className="text-xs font-semibold text-[#00E5FF] tracking-[0.2em] uppercase mb-3">Nossa essência</p>
+          <h2 className="text-3xl sm:text-4xl font-black mb-4">
             Por que a <span className="gradient-text">SyntaxSoul</span>?
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto">
+          <p className="text-[#8A9BBF] max-w-xl mx-auto">
             Não entregamos apenas código — entregamos sistemas que funcionam de verdade.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {values.map((item, i) => {
-            const colors = colorMap[item.color as keyof typeof colorMap]
+            const colors = colorMap[item.color]
             return (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`p-6 rounded-xl border ${colors.border} ${colors.glow} ${colors.bg} transition-all duration-300`}
+                className={`group relative p-6 rounded-2xl border ${colors.border} ${colors.hoverBorder} ${colors.glow} ${colors.bg} transition-all duration-300 backdrop-blur-sm overflow-hidden`}
               >
-                <div className={`${colors.icon} mb-4`}>
+                {/* Top accent bar */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: `linear-gradient(90deg, transparent, ${colors.barColor}, transparent)` }}
+                />
+
+                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${colors.iconBg} ${colors.icon} mb-5 transition-transform duration-300 group-hover:scale-110`}>
                   {item.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">{item.description}</p>
+                <h3 className="text-base font-bold text-white mb-2">{item.title}</h3>
+                <p className="text-sm text-[#8A9BBF] leading-relaxed">{item.description}</p>
               </motion.div>
             )
           })}
