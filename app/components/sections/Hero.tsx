@@ -146,19 +146,19 @@ export default function Hero() {
             </div>
 
             {/* Stats */}
-            <div className="flex items-center gap-8 pt-5 border-t border-white/8">
+            <div className="flex items-center pt-5 border-t border-white/8">
               {[
                 { value: '50+', label: 'Projetos entregues' },
                 { value: '99.9%', label: 'Uptime garantido' },
                 { value: '5★', label: 'Avaliação média' },
               ].map((stat, i) => (
-                <div key={stat.label} className="flex items-center gap-6">
-                  {i > 0 && <div className="w-px h-10 bg-white/10" />}
-                  <div className="text-center">
+                <>
+                  {i > 0 && <div key={`sep-${i}`} className="w-px h-10 bg-white/10 mx-6" />}
+                  <div key={stat.label} className="text-center">
                     <p className="text-2xl font-black gradient-text">{stat.value}</p>
                     <p className="text-[11px] text-[#8A9BBF] mt-0.5 whitespace-nowrap">{stat.label}</p>
                   </div>
-                </div>
+                </>
               ))}
             </div>
           </motion.div>

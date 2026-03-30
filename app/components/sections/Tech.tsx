@@ -40,7 +40,6 @@ function renderCode(code: string) {
         <span key={i} className="block text-[#8B2FE8]/80">{line}{'\n'}</span>
       )
     }
-    let rendered = line
     const parts: React.ReactNode[] = []
     let remaining = line
     let idx = 0
@@ -69,8 +68,6 @@ function renderCode(code: string) {
         idx++
       }
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    void rendered
     return <span key={i} className="block">{parts}{'\n'}</span>
   })
 }
