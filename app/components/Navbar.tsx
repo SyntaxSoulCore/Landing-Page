@@ -1,7 +1,14 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import SyntaxSoulLogo from '@/app/components/ui/SyntaxSoulLogo'
+
+const navLinks = [
+  { label: 'Essência', href: '#proof' },
+  { label: 'Capacidades', href: '#services' },
+  { label: 'Arquitetura', href: '#tech' },
+  { label: 'Impacto', href: '#cases' },
+]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -9,61 +16,55 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
+
+    handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
+
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const navLinks = [
-    { label: 'Soluções', href: '#services' },
-    { label: 'Stack', href: '#tech' },
-    { label: 'Cases', href: '#cases' },
-  ]
-
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-navy/90 backdrop-blur-md border-b border-[#00E5FF]/10 shadow-[0_4px_30px_rgba(0,229,255,0.05)]'
+          ? 'border-b border-white/10 bg-[rgba(5,10,24,0.82)] shadow-[0_20px_60px_rgba(1,3,10,0.45)] backdrop-blur-[18px]'
           : 'bg-transparent'
       }`}
       aria-label="Navegação principal"
     >
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-18 py-3">
-          {/* Logo */}
-          <a href="#hero" className="flex items-center">
-            <SyntaxSoulLogo size={42} showText />
+      <div className="section-shell">
+        <div className="flex items-center justify-between py-4">
+          <a href="#hero" className="flex items-center gap-3" aria-label="Voltar ao topo">
+            <SyntaxSoulLogo size={34} showText={false} />
+            <div className="hidden sm:block">
+              <p className="text-sm font-semibold tracking-[0.18em] text-white">SyntaxSoul</p>
+              <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[var(--ss-muted)]">
+                Forjando tecnologia com alma
+              </p>
+            </div>
           </a>
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-7">
             {navLinks.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-sm font-medium text-[#8A9BBF] hover:text-[#00E5FF] transition-colors duration-200 relative group"
-              >
+              <a key={item.label} href={item.href} className="text-sm font-medium text-[var(--ss-muted)] hover:text-white">
                 {item.label}
-                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-gradient-to-r from-[#00E5FF] to-[#8B2FE8] group-hover:w-full transition-all duration-300" />
               </a>
             ))}
           </div>
 
-          {/* CTA + mobile hamburger */}
           <div className="flex items-center gap-4">
             <a
               href="#contact"
-              className="hidden md:inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-semibold text-navy-card transition-all duration-300 hover:scale-105 neon-glow-cyan"
-              style={{ background: 'linear-gradient(135deg, #00E5FF, #8B2FE8)' }}
+              className="hidden md:inline-flex items-center rounded-full border border-[rgba(137,246,255,0.26)] bg-[linear-gradient(135deg,rgba(137,246,255,0.18),rgba(138,98,255,0.22))] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_0_35px_rgba(45,219,255,0.12)] hover:-translate-y-0.5 hover:border-[rgba(137,246,255,0.45)]"
             >
-              Falar conosco
+              Iniciar conversa
             </a>
 
-            {/* Mobile menu toggle */}
             <button
-              className="md:hidden text-[#8A9BBF] hover:text-white transition-colors"
-              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden rounded-full border border-white/10 bg-white/[0.03] p-2 text-[var(--ss-muted)] hover:text-white"
+              onClick={() => setMenuOpen((open) => !open)}
               aria-label="Abrir menu"
+              aria-expanded={menuOpen}
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {menuOpen
@@ -75,16 +76,15 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile dropdown */}
         {menuOpen && (
-          <div className="md:hidden pb-4 pt-1 border-t border-white/5">
-            <div className="flex flex-col gap-3 mt-3">
+          <div className="md:hidden pb-4 pt-2">
+            <div className="soft-panel flex flex-col gap-2 rounded-[1.6rem] px-4 py-4">
               {navLinks.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
                   onClick={() => setMenuOpen(false)}
-                  className="text-sm font-medium text-[#8A9BBF] hover:text-[#00E5FF] transition-colors px-2 py-1"
+                  className="rounded-2xl px-3 py-2 text-sm font-medium text-[var(--ss-muted)] hover:bg-white/[0.04] hover:text-white"
                 >
                   {item.label}
                 </a>
@@ -92,10 +92,9 @@ export default function Navbar() {
               <a
                 href="#contact"
                 onClick={() => setMenuOpen(false)}
-                className="inline-flex items-center justify-center mt-1 px-5 py-3 rounded-lg text-sm font-semibold text-navy-card"
-                style={{ background: 'linear-gradient(135deg, #00E5FF, #8B2FE8)' }}
+                className="mt-2 inline-flex items-center justify-center rounded-full border border-[rgba(137,246,255,0.26)] bg-[linear-gradient(135deg,rgba(137,246,255,0.18),rgba(138,98,255,0.22))] px-5 py-3 text-sm font-semibold text-white"
               >
-                Falar conosco
+                Iniciar conversa
               </a>
             </div>
           </div>

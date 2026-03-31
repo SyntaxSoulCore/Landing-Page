@@ -1,116 +1,76 @@
-'use client'
-
-import { motion } from 'framer-motion'
-import SyntaxSoulLogo from '@/app/components/ui/SyntaxSoulLogo'
+import Image from 'next/image'
+import { logoSecondary, mascotCore } from '@/app/lib/brand-assets'
 
 export default function CTA() {
   return (
-    <section
-      id="contact"
-      className="py-24 relative overflow-hidden"
-      style={{ background: '#080C14' }}
-      aria-label="Call to action"
-    >
-      <div className="section-divider absolute top-0 left-0 right-0" aria-hidden="true" />
+    <section id="contact" className="relative overflow-hidden py-24" aria-label="Contato">
+      <div className="glow-divider absolute left-0 right-0 top-0" aria-hidden="true" />
 
-      {/* Circuit grid */}
-      <div className="absolute inset-0 circuit-bg opacity-60 pointer-events-none" aria-hidden="true" />
+      <div className="section-shell relative z-10">
+        <div className="line-panel relative overflow-hidden rounded-[2.5rem]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(137,246,255,0.14),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(203,121,255,0.16),transparent_32%)]" />
+          <div className="noise-overlay" aria-hidden="true" />
 
-      {/* Left glow */}
-      <div
-        className="absolute top-1/2 -translate-y-1/2 -left-32 w-96 h-96 rounded-full opacity-15 pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #00E5FF 0%, transparent 70%)' }}
-        aria-hidden="true"
-      />
-      {/* Right glow */}
-      <div
-        className="absolute top-1/2 -translate-y-1/2 -right-32 w-96 h-96 rounded-full opacity-15 pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #8B2FE8 0%, transparent 70%)' }}
-        aria-hidden="true"
-      />
+          <div className="relative grid gap-12 p-8 sm:p-12 lg:grid-cols-[minmax(0,1fr)_360px] lg:p-16">
+            <div className="max-w-[42rem]">
+              <Image
+                src={logoSecondary}
+                alt=""
+                width={208}
+                height={169}
+                className="mb-8 h-auto w-[11rem] sm:w-[13rem]"
+              />
 
-      <div className="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative rounded-3xl border border-white/10 overflow-hidden"
-          style={{
-            background: 'linear-gradient(135deg, rgba(0,229,255,0.05) 0%, rgba(14,21,37,0.8) 40%, rgba(139,47,232,0.05) 100%)',
-          }}
-        >
-          {/* Top gradient line */}
-          <div
-            className="absolute top-0 left-0 right-0 h-[2px]"
-            style={{ background: 'linear-gradient(90deg, transparent, #00E5FF, #8B2FE8, transparent)' }}
-            aria-hidden="true"
-          />
+              <span className="eyebrow">Contato</span>
+              <h2 className="mt-6 max-w-[14ch] text-balance text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl lg:text-6xl">
+                Traga o briefing. A travessia técnica a gente desenha junto.
+              </h2>
+              <p className="body-muted mt-6 max-w-[36rem] text-lg leading-8">
+                Se a ideia exige mais densidade do que um template entrega, a conversa certa começa por contexto,
+                objetivo e limites reais do produto.
+              </p>
 
-          {/* Corner circuit decorations */}
-          <svg className="absolute top-6 left-6 opacity-20" width="80" height="80" viewBox="0 0 80 80" aria-hidden="true">
-            <path d="M8 8 L8 40 L40 40" stroke="#00E5FF" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-            <circle cx="8" cy="8" r="3" fill="#00E5FF" />
-            <circle cx="40" cy="40" r="3" fill="#00E5FF" />
-          </svg>
-          <svg className="absolute bottom-6 right-6 opacity-20" width="80" height="80" viewBox="0 0 80 80" aria-hidden="true">
-            <path d="M72 72 L72 40 L40 40" stroke="#8B2FE8" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-            <circle cx="72" cy="72" r="3" fill="#8B2FE8" />
-            <circle cx="40" cy="40" r="3" fill="#8B2FE8" />
-          </svg>
-
-          <div className="relative z-10 p-12 lg:p-20 text-center">
-            {/* Logo */}
-            <div className="flex justify-center mb-8" aria-hidden="true">
-              <SyntaxSoulLogo size={52} showText={false} />
-            </div>
-
-            <div className="max-w-2xl mx-auto space-y-8">
-              <div>
-                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-4 leading-tight">
-                  Pronto para{' '}
-                  <span className="gradient-text-shimmer">elevar</span>
-                  <br />
-                  seu produto?
-                </h2>
-                <p className="text-lg text-[#8A9BBF]">
-                  Fale com um especialista agora. Sem jargão, sem promessas vazias —
-                  apenas soluções que entregam.
-                </p>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="mt-9 flex flex-col gap-4 sm:flex-row">
                 <a
                   href="mailto:hello@syntaxsoul.com"
-                  className="inline-flex items-center justify-center gap-3 px-10 py-5 rounded-xl font-bold text-lg text-[#080C14] transition-all duration-300 neon-glow-cyan hover:scale-105"
-                  style={{ background: 'linear-gradient(135deg, #00E5FF, #8B2FE8)' }}
+                  className="inline-flex items-center justify-center rounded-full bg-[linear-gradient(135deg,var(--ss-cyan),var(--ss-violet),var(--ss-orchid))] px-7 py-4 text-sm font-semibold text-[#020611] shadow-[0_22px_45px_rgba(45,219,255,0.24)] hover:-translate-y-0.5"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                  Falar com especialista
+                  hello@syntaxsoul.com
+                </a>
+                <a
+                  href="#hero"
+                  className="pill-link justify-center text-white hover:border-[rgba(137,246,255,0.35)] hover:bg-white/[0.05]"
+                >
+                  Revisitar manifesto
                 </a>
               </div>
 
-              {/* Trust indicators */}
-              <div className="flex flex-wrap justify-center gap-6">
-                {[
-                  'Resposta em até 24h',
-                  'Sem compromisso',
-                  '100% confidencial',
-                ].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-sm text-[#8A9BBF]">
-                    <svg className="w-4 h-4 text-[#00E5FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
+              <div className="mt-8 flex flex-wrap gap-6 text-sm text-white/70">
+                {['Produto com intenção', 'Arquitetura legível', 'IA aplicada com critério'].map((item) => (
+                  <span key={item} className="inline-flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-[var(--ss-cyan-strong)]" aria-hidden="true" />
                     {item}
-                  </div>
+                  </span>
                 ))}
               </div>
             </div>
+
+            <div className="relative flex items-center justify-center">
+              <div className="halo-cyan left-[8%] top-[12%] h-[13rem] w-[13rem]" aria-hidden="true" />
+              <div className="halo-violet bottom-[8%] right-[8%] h-[12rem] w-[12rem]" aria-hidden="true" />
+
+              <div className="relative aspect-[0.82] w-full max-w-[21rem] animate-drift">
+                <Image
+                  src={mascotCore}
+                  alt=""
+                  fill
+                  sizes="(max-width: 1024px) 80vw, 360px"
+                  className="object-contain"
+                />
+              </div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

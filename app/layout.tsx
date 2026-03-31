@@ -1,14 +1,23 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { soulMono, soulSans } from '@/app/fonts'
 
 export const metadata: Metadata = {
   title: 'SyntaxSoul | Forjando Tecnologia com Alma',
-  description: 'Desenvolvimento de software sob medida: sistemas escaláveis, arquitetura limpa, integrações e IA aplicada. Transformamos ideias em tecnologia de alta performance.',
-  keywords: 'desenvolvimento software, arquitetura sistemas, Node.js, NestJS, Java, Spring Boot, integrações API',
+  description: 'A SyntaxSoul projeta e constrói software com densidade técnica, presença visual e arquitetura pronta para evoluir.',
+  keywords: [
+    'SyntaxSoul',
+    'desenvolvimento de software',
+    'arquitetura de sistemas',
+    'interfaces digitais',
+    'IA aplicada',
+    'integrações',
+  ],
   openGraph: {
     title: 'SyntaxSoul | Forjando Tecnologia com Alma',
-    description: 'Desenvolvimento de software sob medida: sistemas escaláveis, arquitetura limpa, integrações e IA aplicada.',
+    description: 'Software sob medida com arquitetura, IA aplicada e experiências digitais que carregam intenção.',
     type: 'website',
+    siteName: 'SyntaxSoul',
   },
 }
 
@@ -18,14 +27,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-BR" className="scroll-smooth">
+    <html lang="pt-BR" className={`${soulSans.variable} ${soulMono.variable} scroll-smooth`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
+        <meta name="theme-color" content="#020611" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -33,13 +37,19 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Organization',
               name: 'SyntaxSoul',
-              description: 'Desenvolvimento de software sob medida com foco em performance, escalabilidade e arquitetura limpa.',
+              description: 'Software sob medida com foco em arquitetura, clareza de produto e experiências digitais com presença.',
               url: 'https://syntaxsoul.com',
             }),
           }}
         />
       </head>
-      <body className="bg-navy text-[#F0F4FF] antialiased">
+      <body className="bg-[var(--ss-bg)] text-[var(--ss-text)] antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-[#020611]"
+        >
+          Pular para o conteúdo
+        </a>
         {children}
       </body>
     </html>

@@ -22,7 +22,8 @@ const config: Config = {
         'neon-purple': '#8B2FE8',
       },
       fontFamily: {
-        sans: ['Inter', 'Sora', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-sans)'],
+        mono: ['var(--font-mono)'],
       },
       maxWidth: {
         container: '1280px',
@@ -48,7 +49,7 @@ const config: Config = {
           '0%': { backgroundPosition: '-200% center' },
           '100%': { backgroundPosition: '200% center' },
         },
-        'twinkle': {
+        twinkle: {
           '0%, 100%': { opacity: '0.2' },
           '50%': { opacity: '0.8' },
         },
@@ -59,7 +60,7 @@ const config: Config = {
         'pulse-glow': 'pulse-glow 2.5s ease-in-out infinite',
         flicker: 'flicker 3s ease-in-out infinite',
         shimmer: 'shimmer 3s linear infinite',
-        'twinkle': 'twinkle 3s ease-in-out infinite',
+        twinkle: 'twinkle 3s ease-in-out infinite',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -68,4 +69,5 @@ const config: Config = {
   },
   plugins: [],
 }
+
 export default config
